@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment # change here
+metadata:
+  name: hello-app
+spec:
+  revisionHistoryLimit: 10
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: hello-app
+  template:
+    metadata:
+      labels:
+        app: hello-app
+    spec:
+      containers:
+        - image: nintran52/hello-kube:v1
+          name: hello-app
+          ports:
+            - containerPort: 3000
